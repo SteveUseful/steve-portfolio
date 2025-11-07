@@ -1,2 +1,2 @@
-# steve-portfolio
+# Steve's Portfolio
 Personal portfolio
