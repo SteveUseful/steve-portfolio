@@ -1,57 +1,362 @@
 <!doctype html>
 <html lang="en">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Steve Silliker — Portfolio</title>
-<style>
-  body {max-width: 820px; margin: 2rem auto; padding: 0 1rem;
-        line-height: 1.6; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;}
-  h1,h2 {margin-top: 2rem;}
-  a {text-decoration: none; color:#0055ff;}
-</style>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Steve Silliker — Portfolio</title>
+  <meta name="description" content="Steve Silliker — technical writer and full-stack developer. Tutorials, sample apps, and AI-enhanced workflows that help developers move fast and scale confidently." />
+  <style>
+    /* =========
+       Design tokens
+       ========= */
+    :root{
+      --bg: #0b0d12;           /* near-black slate */
+      --bg-soft:#0f1218;
+      --card:#121722;
+      --text:#e8edf6;
+      --muted:#9fb0c9;
+      --brand:#6aa0ff;         /* professional blue */
+      --brand-2:#8ee0d0;       /* accent mint */
+      --ring: rgba(106,160,255,0.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --maxw: 1100px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f8fb;
+        --bg-soft:#eef2f9;
+        --card:#ffffff;
+        --text:#0e1624;
+        --muted:#51627d;
+        --brand:#2f6dff;
+        --brand-2:#00b89f;
+        --ring: rgba(47,109,255,0.25);
+        --shadow: 0 10px 24px rgba(14,22,36,.08);
+      }
+    }
+
+    /* =========
+       Base
+       ========= */
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 85% -10%, rgba(106,160,255,.12), transparent 60%),
+                  radial-gradient(1000px 700px at -5% -10%, rgba(142,224,208,.10), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%; display:block}
+
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+    /* =========
+       Header / Nav
+       ========= */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: saturate(180%) blur(8px);
+      background: color-mix(in lab, var(--bg) 85%, transparent);
+      border-bottom:1px solid color-mix(in lab, var(--muted) 20%, transparent);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .logo{font-weight:600; letter-spacing:.2px}
+    .logo b{color:var(--brand)}
+    .nav a.button{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.6rem .9rem; border-radius:12px; background:var(--brand);
+      color:#fff; text-decoration:none; box-shadow: var(--shadow);
+    }
+    .nav-links a{margin-left:18px; color:var(--text); opacity:.8}
+    .nav-links a:hover{opacity:1}
+
+    /* =========
+       Hero
+       ========= */
+    .hero{padding:84px 0 32px}
+    .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:center}
+    .kicker{color:var(--brand-2); font-weight:600; letter-spacing:.4px}
+    h1{font-size: clamp(28px, 5vw, 44px); line-height:1.15; margin:.35rem 0 1rem}
+    .lead{font-size: clamp(16px, 2.3vw, 19px); color:var(--muted); max-width:60ch}
+    .cta-row{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; gap:.6rem;
+      padding:.8rem 1rem; border-radius:14px; border:1px solid color-mix(in lab, var(--brand) 55%, transparent);
+      color:var(--text); background:linear-gradient(180deg, color-mix(in lab, var(--card) 80%, transparent), var(--card));
+      box-shadow: var(--shadow);
+    }
+    .btn.primary{background:linear-gradient(180deg, var(--brand), color-mix(in lab, var(--brand) 80%, var(--bg))); border-color:transparent; color:#fff}
+    .hero-card{
+      background:linear-gradient(180deg, color-mix(in lab, var(--card) 85%, transparent), var(--card));
+      border: 1px solid color-mix(in lab, var(--muted) 18%, transparent);
+      border-radius: var(--radius); padding:22px; box-shadow: var(--shadow);
+    }
+    .hero-list{margin:0; padding:0; list-style:none}
+    .hero-list li{display:flex; gap:10px; margin:.5rem 0; color:var(--muted)}
+    .hero-list li span{color:var(--text)}
+
+    /* =========
+       Sections
+       ========= */
+    section{padding:56px 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:20px}
+    .section-head h2{margin:0; font-size: clamp(22px, 3.5vw, 28px)}
+    .muted{color:var(--muted)}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      border-radius: var(--radius);
+      background:linear-gradient(180deg, color-mix(in lab, var(--card) 85%, transparent), var(--card));
+      border:1px solid color-mix(in lab, var(--muted) 18%, transparent);
+      padding:18px; box-shadow: var(--shadow);
+      transform: translateY(0); transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .card:hover{ transform: translateY(-4px); box-shadow:0 14px 40px rgba(0,0,0,.28); border-color: color-mix(in lab, var(--brand) 35%, transparent)}
+    .card h3{margin:.2rem 0 .4rem; font-size:18px}
+    .card p{margin:.2rem 0 .6rem; color:var(--muted)}
+    .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px}
+    .tag{font-size:12px; padding:.2rem .5rem; border-radius:999px; background: color-mix(in lab, var(--brand) 20%, transparent); color: color-mix(in lab, var(--brand) 80%, #fff); border:1px solid color-mix(in lab, var(--brand) 45%, transparent)}
+
+    /* =========
+       Footer
+       ========= */
+    footer{padding:40px 0 56px; color:var(--muted)}
+    .foot-links{display:flex; gap:14px; flex-wrap:wrap}
+
+    /* =========
+       Motion
+       ========= */
+    .reveal{opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.in{opacity:1; transform: translateY(0)}
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none!important; transition:none!important}
+      .reveal, .reveal.in{opacity:1; transform:none}
+    }
+    /* focus ring */
+    :focus-visible{outline: 3px solid var(--ring); outline-offset: 2px; border-radius: 8px}
+  </style>
+</head>
 <body>
-  <h1>Steve Silliker — Portfolio</h1>
-  <p>I build tools and content that help developers move fast and scale confidently.  
-  I write code, ship tutorials, and produce short walkthroughs that make complex platforms approachable.</p>
 
-  <h2>Highlights</h2>
-  <ul>
-    <li>Shopify: Model Context Protocol (MCP) docs owner; multi-agent LLM workflow automating 1,400 + GraphQL pages (~98 % accuracy).</li>
-    <li>Userful: Built docs-as-code pipelines and developer onboarding; onboarding 21 → 6 days; NRR 130 %.</li>
-    <li>Render: Deployed a FastAPI + Postgres sentiment-analysis service.</li>
-  </ul>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">Steve Silliker <b>Portfolio</b></div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+        <a href="#videos">Videos</a>
+        <a href="#contact" class="button">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-  <h2>Projects</h2>
-  <ol>
-    <li>
-      <strong>Sentiment Analysis on Render</strong><br/>
-      Live: <a href="https://sentiment-yx4o.onrender.com">sentiment-yx4o.onrender.com</a><br/>
-      Stack: FastAPI / Postgres — end-to-end sample app focused on Render DX
-    </li>
-    <li>
-      <strong>LLM GraphQL Description Generator</strong><br/>
-      Multi-agent pipeline (Claude + Promptfoo); ~98 % accuracy; auto-PRs and guardrails.
-    </li>
-    <li>
-      <strong>Shopify MCP Documentation</strong><br/>
-      <a href="https://shopify.dev/docs/apps/build/devmcp">shopify.dev/docs/apps/build/devmcp</a>
-    </li>
-    <li>
-      <strong>Storefront AI Agent Tutorial</strong><br/>
-      <a href="https://shopify.dev/docs/apps/build/storefront-mcp/build-storefront-ai-agent?framework=reactRouter">tutorial link</a>
-    </li>
-  </ol>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="kicker">Developer-first content and code</div>
+          <h1>I build tools and content that help developers move fast and scale confidently.</h1>
+          <p class="lead">I write code, ship tutorials, and produce short walkthroughs that make complex platforms approachable. Hands-on with Node.js, Python, Postgres, Docker, Remix/React, GraphQL, and AI-assisted workflows.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#projects">View projects</a>
+            <a class="btn" href="https://github.com/SteveUseful" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href="mailto:steveuseful@gmail.com">Email me</a>
+          </div>
+        </div>
+        <aside class="hero-card reveal" aria-label="Highlights">
+          <h2 style="margin:0 0 .5rem">Highlights</h2>
+          <ul class="hero-list">
+            <li>• <span>Shopify: MCP docs owner; multi-agent LLM workflow automating 1,400+ GraphQL pages (~98% accuracy).</span></li>
+            <li>• <span>Userful: docs-as-code pipelines; onboarding from 21 → 6 days; NRR 130%.</span></li>
+            <li>• <span>Render: deployed FastAPI + Postgres sentiment analysis demo.</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
-  <h2>Videos</h2>
-  <ul>
-    <li>90 s: Deploying a sample FastAPI app on Render (Loom/YouTube unlisted)</li>
-    <li>90 s: Multi-agent GraphQL pipeline overview (Loom/YouTube)</li>
-  </ul>
+    <!-- Projects -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <div class="muted">Live demos, case studies, and tutorials</div>
+        </div>
 
-  <h2>Skills</h2>
-  <p>Node.js • Python • Postgres • Docker • React/Remix • GraphQL • CI/CD • GCP • Render • Promptfoo • Claude • Cursor IDE • MCP • embeddings</p>
+        <div class="grid">
+          <article class="card reveal">
+            <h3>Sentiment Analysis on Render</h3>
+            <p>FastAPI + Postgres service deployed on Render to validate the developer workflow end-to-end.</p>
+            <div class="tags">
+              <span class="tag">FastAPI</span><span class="tag">Postgres</span><span class="tag">Render</span>
+            </div>
+            <p style="margin-top:10px">
+              <a href="https://sentiment-yx4o.onrender.com" target="_blank" rel="noopener">Live demo →</a>
+            </p>
+          </article>
 
-  <h2>Contact</h2>
-  <p>steveuseful@gmail.com • <a href="https://linkedin.com/in/silliker">linkedin.com/in/silliker</a> • <a href="https://github.com/SteveUseful">github.com/SteveUseful</a></p>
+          <article class="card reveal">
+            <h3>LLM GraphQL Description Generator</h3>
+            <p>Multi-agent pipeline (Claude + Promptfoo) generating and validating GraphQL descriptions with auto-PRs and guardrails.</p>
+            <div class="tags">
+              <span class="tag">Claude</span><span class="tag">Promptfoo</span><span class="tag">GraphQL</span>
+            </div>
+            <p style="margin-top:10px">Outcome: 1,400+ pages; ~98% accuracy; ~25% review cycle reduction.</p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Shopify MCP Documentation</h3>
+            <p>Owner/author for public MCP docs, tutorials, and internal developer videos.</p>
+            <div class="tags">
+              <span class="tag">MCP</span><span class="tag">Docs-as-code</span><span class="tag">Remix</span>
+            </div>
+            <p style="margin-top:10px">
+              <a href="https://shopify.dev/docs/apps/build/devmcp" target="_blank" rel="noopener">Docs →</a>
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Storefront AI Agent Tutorial</h3>
+            <p>Step-by-step guide with code for building and deploying a Storefront AI Agent.</p>
+            <div class="tags">
+              <span class="tag">Remix</span><span class="tag">React</span><span class="tag">MCP</span>
+            </div>
+            <p style="margin-top:10px">
+              <a href="https://shopify.dev/docs/apps/build/storefront-mcp/build-storefront-ai-agent?framework=reactRouter" target="_blank" rel="noopener">Tutorial →</a>
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Internal Developer Videos</h3>
+            <p>Short, focused walkthroughs for Shopify 1P developers on MCP workflows and best practices.</p>
+            <div class="tags">
+              <span class="tag">Video</span><span class="tag">Tutorials</span>
+            </div>
+            <p style="margin-top:10px">
+              <a href="#videos">See examples ↓</a>
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Churn Prediction (side project)</h3>
+            <p>Regression-based churn prediction model; informed GTM and onboarding strategies.</p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">ML</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Writing -->
+    <section id="writing">
+      <div class="container">
+        <div class="section-head">
+          <h2>Writing</h2>
+          <div class="muted">Selected posts and references</div>
+        </div>
+        <div class="grid">
+          <article class="card reveal">
+            <h3>MCP on shopify.dev</h3>
+            <p>Public documentation, samples, and integration guidance.</p>
+            <p><a href="https://shopify.dev/docs/apps/build/devmcp" target="_blank" rel="noopener">Read →</a></p>
+          </article>
+          <article class="card reveal">
+            <h3>Storefront AI Agent</h3>
+            <p>Step-by-step build in Remix / React Router with MCP.</p>
+            <p><a href="https://shopify.dev/docs/apps/build/storefront-mcp/build-storefront-ai-agent?framework=reactRouter" target="_blank" rel="noopener">Read →</a></p>
+          </article>
+          <article class="card reveal">
+            <h3>Case study: LLM GraphQL pipeline</h3>
+            <p>System design, evaluation harness, and lessons learned.</p>
+            <p><a href="#" aria-disabled="true">Coming soon</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos -->
+    <section id="videos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Videos</h2>
+          <div class="muted">Short walkthroughs (unlisted)</div>
+        </div>
+        <div class="grid">
+          <article class="card reveal">
+            <h3>Deploy a FastAPI app on Render (90s)</h3>
+            <p><a href="YOUR_VIDEO_LINK_HERE" target="_blank" rel="noopener">Watch →</a></p>
+          </article>
+          <article class="card reveal">
+            <h3>Multi-agent GraphQL pipeline (90s)</h3>
+            <p><a href="YOUR_VIDEO_LINK_HERE" target="_blank" rel="noopener">Watch →</a></p>
+          </article>
+          <article class="card reveal">
+            <h3>MCP overview (90s)</h3>
+            <p><a href="YOUR_VIDEO_LINK_HERE" target="_blank" rel="noopener">Watch →</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container reveal">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <div class="muted">Open to building tutorials, sample apps, and video walkthroughs for launches</div>
+        </div>
+        <p>Email: <a href="mailto:steveuseful@gmail.com">steveuseful@gmail.com</a></p>
+        <div class="foot-links" style="margin-top:10px">
+          <a href="https://linkedin.com/in/silliker" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/SteveUseful" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://steveflys.com" target="_blank" rel="noopener">Website</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="muted">© <span id="y"></span> Steve Silliker. Built and deployed on Render Free.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          obs.unobserve(e.target);
+        }
+      })
+    }, {threshold:.12});
+    els.forEach(el=>obs.observe(el));
+  </script>
 </body>
 </html>
