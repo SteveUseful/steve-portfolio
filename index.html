@@ -1,22 +1,40 @@
-<!doctype html>
-<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Steve Silliker — Portfolio</title>
-  <meta name="description" content="Steve Silliker — technical writer and full-stack developer. Tutorials, sample apps, and AI-enhanced workflows that help developers move fast and scale confidently." />
+  <meta name="description" content="Steve Silliker — technical content engineer and full-stack developer. Tutorials, sample apps, and AI-enhanced workflows that help developers move fast and scale confidently." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0b0d12" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Steve Silliker — Developer Content & AI Workflows" />
+  <meta property="og:description" content="Developer-first content and tools — building docs, tutorials, and AI workflows that help developers move fast and scale confidently." />
+  <meta property="og:url" content="https://steve-portfolio-oq2f.onrender.com/" />
+  <meta property="og:image" content="https://steve-portfolio-oq2f.onrender.com/assets/og-preview.png" />
+
+  <!-- Twitter (X) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Steve Silliker — Developer Content & AI Workflows" />
+  <meta name="twitter:description" content="I build tools, docs, and AI-assisted tutorials that empower developers to move fast and scale confidently." />
+  <meta name="twitter:image" content="https://steve-portfolio-oq2f.onrender.com/assets/og-preview.png" />
+  <meta name="twitter:creator" content="@SteveUseful" />
+
+  <!-- Favicon / Open Graph image path (add these files under /assets) -->
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+
   <style>
     /* =========
        Design tokens
        ========= */
     :root{
-      --bg: #0b0d12;           /* near-black slate */
+      --bg: #0b0d12;
       --bg-soft:#0f1218;
       --card:#121722;
       --text:#e8edf6;
       --muted:#9fb0c9;
-      --brand:#6aa0ff;         /* professional blue */
-      --brand-2:#8ee0d0;       /* accent mint */
+      --brand:#6aa0ff;
+      --brand-2:#8ee0d0;
       --ring: rgba(106,160,255,0.35);
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --radius: 16px;
@@ -44,16 +62,16 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 85% -10%, rgba(106,160,255,.12), transparent 60%),
-                  radial-gradient(1000px 700px at -5% -10%, rgba(142,224,208,.10), transparent 60%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 800px at 85% -10%, rgba(106,160,255,.12), transparent 60%),
+        radial-gradient(1000px 700px at -5% -10%, rgba(142,224,208,.10), transparent 60%),
+        var(--bg);
       color:var(--text);
       line-height:1.6;
     }
     a{color:var(--brand); text-decoration:none}
     a:hover{text-decoration:underline}
     img{max-width:100%; display:block}
-
     .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
 
     /* =========
@@ -71,13 +89,13 @@
     }
     .logo{font-weight:600; letter-spacing:.2px}
     .logo b{color:var(--brand)}
+    .nav-links a{margin-left:18px; color:var(--text); opacity:.85}
+    .nav-links a:hover{opacity:1}
     .nav a.button{
       display:inline-flex; align-items:center; gap:.5rem;
       padding:.6rem .9rem; border-radius:12px; background:var(--brand);
       color:#fff; text-decoration:none; box-shadow: var(--shadow);
     }
-    .nav-links a{margin-left:18px; color:var(--text); opacity:.8}
-    .nav-links a:hover{opacity:1}
 
     /* =========
        Hero
@@ -103,6 +121,23 @@
     .hero-list{margin:0; padding:0; list-style:none}
     .hero-list li{display:flex; gap:10px; margin:.5rem 0; color:var(--muted)}
     .hero-list li span{color:var(--text)}
+
+    /* impact badges */
+    .impact-badges{
+      display:flex; gap:14px; margin:18px 0 6px; flex-wrap:wrap;
+    }
+    .badge{
+      display:flex; flex-direction:column; justify-content:center;
+      border:1px solid color-mix(in lab, var(--muted) 22%, transparent);
+      background:linear-gradient(180deg, color-mix(in lab, var(--card) 85%, transparent), var(--card));
+      border-radius:12px; padding:10px 14px; min-width:140px; box-shadow: var(--shadow);
+    }
+    .badge-num{font-weight:700; font-size:20px; line-height:1; letter-spacing:.3px}
+    .badge-text{font-size:12.5px; color:var(--muted); margin-top:6px}
+    @media (max-width:640px){
+      .impact-badges{gap:10px}
+      .badge{min-width:120px}
+    }
 
     /* =========
        Sections
@@ -152,7 +187,6 @@
       *{animation:none!important; transition:none!important}
       .reveal, .reveal.in{opacity:1; transform:none}
     }
-    /* focus ring */
     :focus-visible{outline: 3px solid var(--ring); outline-offset: 2px; border-radius: 8px}
   </style>
 </head>
@@ -164,7 +198,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#projects">Projects</a>
         <a href="#writing">Writing</a>
-        <a href="#videos">Videos</a>
+        <a href="#xposts">X Posts</a>
         <a href="#contact" class="button">Contact</a>
       </nav>
     </div>
@@ -175,21 +209,39 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="reveal">
-          <div class="kicker">Developer-first content and code</div>
+          <div class="kicker">Builder. Writer. Developer advocate.</div>
           <h1>I build tools and content that help developers move fast and scale confidently.</h1>
-          <p class="lead">I write code, ship tutorials, and produce short walkthroughs that make complex platforms approachable. Hands-on with Node.js, Python, Postgres, Docker, Remix/React, GraphQL, and AI-assisted workflows.</p>
+          <p class="lead">I blend engineering, storytelling, and design to make technology more approachable for developers everywhere.</p>
+
+          <div class="impact-badges" aria-label="Key outcomes">
+            <div class="badge">
+              <div class="badge-num">1,400+</div>
+              <div class="badge-text">GraphQL pages automated</div>
+            </div>
+            <div class="badge">
+              <div class="badge-num">98%</div>
+              <div class="badge-text">evaluated accuracy</div>
+            </div>
+            <div class="badge">
+              <div class="badge-num">21→6</div>
+              <div class="badge-text">days to onboard (Userful)</div>
+            </div>
+          </div>
+
           <div class="cta-row">
             <a class="btn primary" href="#projects">View projects</a>
             <a class="btn" href="https://github.com/SteveUseful" target="_blank" rel="noopener">GitHub</a>
             <a class="btn" href="mailto:steveuseful@gmail.com">Email me</a>
           </div>
         </div>
-        <aside class="hero-card reveal" aria-label="Highlights">
-          <h2 style="margin:0 0 .5rem">Highlights</h2>
+
+        <!-- Optional secondary card; keep or remove -->
+        <aside class="hero-card reveal" aria-label="Focus">
+          <h2 style="margin:0 0 .5rem">Currently focused on</h2>
           <ul class="hero-list">
-            <li>• <span>Shopify: MCP docs owner; multi-agent LLM workflow automating 1,400+ GraphQL pages (~98% accuracy).</span></li>
-            <li>• <span>Userful: docs-as-code pipelines; onboarding from 21 → 6 days; NRR 130%.</span></li>
-            <li>• <span>Render: deployed FastAPI + Postgres sentiment analysis demo.</span></li>
+            <li>• <span>AI-enhanced tutorials and sample apps on Render.</span></li>
+            <li>• <span>Short developer walkthrough concepts.</span></li>
+            <li>• <span>MCP servers/clients and practical LLM workflows.</span></li>
           </ul>
         </aside>
       </div>
@@ -205,64 +257,44 @@
 
         <div class="grid">
           <article class="card reveal">
-            <h3>Sentiment Analysis on Render</h3>
+            <h3>Shopify dev MCP server docs</h3>
+            <p>Public developer documentation for MCP servers/clients and extensibility patterns.</p>
+            <div class="tags"><span class="tag">MCP</span><span class="tag">Docs</span></div>
+            <p style="margin-top:10px"><a href="https://shopify.dev/docs/apps/build/devmcp" target="_blank" rel="noopener">Open docs →</a></p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Shopify Storefront MCP</h3>
+            <p>Docs for the Storefront MCP to power product search, carts, and checkout flows.</p>
+            <div class="tags"><span class="tag">MCP</span><span class="tag">Commerce</span></div>
+            <p style="margin-top:10px"><a href="https://shopify.dev/docs/apps/build/storefront-mcp" target="_blank" rel="noopener">Open docs →</a></p>
+          </article>
+
+          <article class="card reveal">
+            <h3>Storefront MCP Tutorial</h3>
+            <p>Step-by-step tutorial for building and deploying a Storefront AI agent.</p>
+            <div class="tags"><span class="tag">Tutorial</span><span class="tag">Remix</span></div>
+            <p style="margin-top:10px"><a href="https://shopify.dev/docs/apps/build/storefront-mcp/build-storefront-ai-agent" target="_blank" rel="noopener">Read tutorial →</a></p>
+          </article>
+
+          <article class="card reveal">
+            <h3>GraphQL reference docs</h3>
+            <p>Example of authoring and AI-assisted generation pipeline for Admin API references.</p>
+            <div class="tags"><span class="tag">GraphQL</span><span class="tag">Content Automation</span></div>
+            <p style="margin-top:10px"><a href="https://shopify.dev/docs/api/admin-graphql/latest/queries/order" target="_blank" rel="noopener">View reference →</a></p>
+          </article>
+
+          <article class="card reveal">
+            <h3>LLM GraphQL description generator</h3>
+            <p>Multi-agent pipeline with Promptfoo evaluation and auto-PRs; reduced review time ~25%.</p>
+            <div class="tags"><span class="tag">Claude</span><span class="tag">Promptfoo</span></div>
+          </article>
+
+          <article class="card reveal">
+            <h3>Sentiment analysis on Render</h3>
             <p>FastAPI + Postgres service deployed on Render to validate the developer workflow end-to-end.</p>
-            <div class="tags">
-              <span class="tag">FastAPI</span><span class="tag">Postgres</span><span class="tag">Render</span>
-            </div>
-            <p style="margin-top:10px">
-              <a href="https://sentiment-yx4o.onrender.com" target="_blank" rel="noopener">Live demo →</a>
-            </p>
-          </article>
-
-          <article class="card reveal">
-            <h3>LLM GraphQL Description Generator</h3>
-            <p>Multi-agent pipeline (Claude + Promptfoo) generating and validating GraphQL descriptions with auto-PRs and guardrails.</p>
-            <div class="tags">
-              <span class="tag">Claude</span><span class="tag">Promptfoo</span><span class="tag">GraphQL</span>
-            </div>
-            <p style="margin-top:10px">Outcome: 1,400+ pages; ~98% accuracy; ~25% review cycle reduction.</p>
-          </article>
-
-          <article class="card reveal">
-            <h3>Shopify MCP Documentation</h3>
-            <p>Owner/author for public MCP docs, tutorials, and internal developer videos.</p>
-            <div class="tags">
-              <span class="tag">MCP</span><span class="tag">Docs-as-code</span><span class="tag">Remix</span>
-            </div>
-            <p style="margin-top:10px">
-              <a href="https://shopify.dev/docs/apps/build/devmcp" target="_blank" rel="noopener">Docs →</a>
-            </p>
-          </article>
-
-          <article class="card reveal">
-            <h3>Storefront AI Agent Tutorial</h3>
-            <p>Step-by-step guide with code for building and deploying a Storefront AI Agent.</p>
-            <div class="tags">
-              <span class="tag">Remix</span><span class="tag">React</span><span class="tag">MCP</span>
-            </div>
-            <p style="margin-top:10px">
-              <a href="https://shopify.dev/docs/apps/build/storefront-mcp/build-storefront-ai-agent?framework=reactRouter" target="_blank" rel="noopener">Tutorial →</a>
-            </p>
-          </article>
-
-          <article class="card reveal">
-            <h3>Internal Developer Videos</h3>
-            <p>Short, focused walkthroughs for Shopify 1P developers on MCP workflows and best practices.</p>
-            <div class="tags">
-              <span class="tag">Video</span><span class="tag">Tutorials</span>
-            </div>
-            <p style="margin-top:10px">
-              <a href="#videos">See examples ↓</a>
-            </p>
-          </article>
-
-          <article class="card reveal">
-            <h3>Churn Prediction (side project)</h3>
-            <p>Regression-based churn prediction model; informed GTM and onboarding strategies.</p>
-            <div class="tags">
-              <span class="tag">Python</span><span class="tag">ML</span>
-            </div>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">Postgres</span><span class="tag">Render</span></div>
+            <p style="margin-top:10px"><a href="https://sentiment-yx4o.onrender.com" target="_blank" rel="noopener">Live demo →</a></p>
           </article>
         </div>
       </div>
@@ -283,8 +315,8 @@
           </article>
           <article class="card reveal">
             <h3>Storefront AI Agent</h3>
-            <p>Step-by-step build in Remix / React Router with MCP.</p>
-            <p><a href="https://shopify.dev/docs/apps/build/storefront-mcp/build-storefront-ai-agent?framework=reactRouter" target="_blank" rel="noopener">Read →</a></p>
+            <p>Step-by-step build with MCP.</p>
+            <p><a href="https://shopify.dev/docs/apps/build/storefront-mcp/build-storefront-ai-agent" target="_blank" rel="noopener">Read →</a></p>
           </article>
           <article class="card reveal">
             <h3>Case study: LLM GraphQL pipeline</h3>
@@ -295,25 +327,37 @@
       </div>
     </section>
 
-    <!-- Videos -->
-    <section id="videos">
+    <!-- X Posts -->
+    <section id="xposts">
       <div class="container">
         <div class="section-head">
-          <h2>Videos</h2>
-          <div class="muted">Short walkthroughs (unlisted)</div>
+          <h2>X Posts</h2>
+          <div class="muted">Selected posts shared by Shopify Developers</div>
         </div>
+
         <div class="grid">
           <article class="card reveal">
-            <h3>Deploy a FastAPI app on Render (90s)</h3>
-            <p><a href="YOUR_VIDEO_LINK_HERE" target="_blank" rel="noopener">Watch →</a></p>
+            <h3>Shopify Dev MCP on X</h3>
+            <p>Say hello to the MCP server — build and refine GraphQL operations from dev tools.</p>
+            <!-- Embedded X post -->
+            <blockquote class="twitter-tweet" data-media-max-width="560">
+              <p lang="en" dir="ltr">Say hello to the <a href="https://t.co/dyLab6I59J">https://t.co/dyLab6I59J</a> MCP server<br><br>You can now build and refine GraphQL operations from Cursor, Windsurf, and Claude desktop <a href="https://t.co/cEKeYMPiqp">pic.twitter.com/cEKeYMPiqp</a></p>&mdash; Shopify Developers (@ShopifyDevs) <a href="https://twitter.com/ShopifyDevs/status/1906738534267883708?ref_src=twsrc%5Etfw">March 31, 2025</a>
+            </blockquote>
           </article>
+
           <article class="card reveal">
-            <h3>Multi-agent GraphQL pipeline (90s)</h3>
-            <p><a href="YOUR_VIDEO_LINK_HERE" target="_blank" rel="noopener">Watch →</a></p>
+            <h3>Shopify MCP servers</h3>
+            <p>Connect the Storefront MCP server directly to OpenAI Responses for product flows.</p>
+            <!-- Embedded X post -->
+            <blockquote class="twitter-tweet" data-media-max-width="560">
+              <p lang="en" dir="ltr">Building your storefront AI agent just got easier.<br><br>Connect the Storefront MCP server directly to the <a href="https://twitter.com/OpenAI?ref_src=twsrc%5Etfw">@OpenAI</a> Responses API to search products, add items to cart, and create checkout links.<br><br>No auth required. <a href="https://t.co/oZsKdhX8QY">pic.twitter.com/oZsKdhX8QY</a></p>&mdash; Shopify Developers (@ShopifyDevs) <a href="https://twitter.com/ShopifyDevs/status/1940441827494318146?ref_src=twsrc%5Etfw">July 2, 2025</a>
+            </blockquote>
           </article>
+
           <article class="card reveal">
-            <h3>MCP overview (90s)</h3>
-            <p><a href="YOUR_VIDEO_LINK_HERE" target="_blank" rel="noopener">Watch →</a></p>
+            <h3>Follow on X</h3>
+            <p>More announcements and demos.</p>
+            <p><a href="https://twitter.com/ShopifyDevs" target="_blank" rel="noopener">Visit profile →</a></p>
           </article>
         </div>
       </div>
@@ -324,7 +368,7 @@
       <div class="container reveal">
         <div class="section-head">
           <h2>Contact</h2>
-          <div class="muted">Open to building tutorials, sample apps, and video walkthroughs for launches</div>
+          <div class="muted">Open to building tutorials, sample apps, and launch-ready walkthroughs</div>
         </div>
         <p>Email: <a href="mailto:steveuseful@gmail.com">steveuseful@gmail.com</a></p>
         <div class="foot-links" style="margin-top:10px">
@@ -358,5 +402,7 @@
     }, {threshold:.12});
     els.forEach(el=>obs.observe(el));
   </script>
+  <!-- X/Twitter widgets: include once per page -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
